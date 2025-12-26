@@ -249,6 +249,8 @@ impl<H: Hal, T: Transport, const RX_BUFFER_SIZE: usize>
             self.connections.swap_remove(connection_index);
         }
 
+        self.update_credit(peer, src_port)?;
+
         Ok(bytes_read)
     }
 
