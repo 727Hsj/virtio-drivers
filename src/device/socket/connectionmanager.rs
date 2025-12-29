@@ -222,6 +222,7 @@ impl<H: Hal, T: Transport, const RX_BUFFER_SIZE: usize>
                 // Already copied the buffer in the callback above.
             }
             VsockEventType::CreditRequest => {
+                log::info!("test_virtio_drivers: recv CreditRequest from peer");
                 // If the peer requested credit, send an update.
                 self.driver.credit_update(&connection.info)?;
                 // No need to pass the request on to the client, we've already handled it.
@@ -249,7 +250,7 @@ impl<H: Hal, T: Transport, const RX_BUFFER_SIZE: usize>
             self.connections.swap_remove(connection_index);
         }
 
-        self.update_credit(peer, src_port)?;
+        // self.update_credit(peer, src_port)?;
 
         Ok(bytes_read)
     }
