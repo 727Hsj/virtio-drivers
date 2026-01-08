@@ -331,6 +331,12 @@ impl<H: Hal, T: Transport, const RX_BUFFER_SIZE: usize> VirtIOSocket<H, T, RX_BU
 
     /// Sends the buffer to the destination.
     pub fn send(&mut self, buffer: &[u8], connection_info: &mut ConnectionInfo) -> Result {
+        log::info!(
+            "peer_free: {}, Sending {} bytes to {:?}",
+            connection_info.peer_free(),
+            buffer.len(),
+            connection_info.dst
+        );
         self.check_peer_buffer_is_sufficient(connection_info, buffer.len())?;
 
         let len = buffer.len() as u32;
