@@ -225,7 +225,7 @@ impl<H: Hal, T: Transport, const RX_BUFFER_SIZE: usize>
                 // If the peer requested credit, send an update.
                 self.driver.credit_update(&connection.info)?;
                 // No need to pass the request on to the client, we've already handled it.
-                return Ok(None);
+                // return Ok(None);
             }
             VsockEventType::CreditUpdate => {}
         }
