@@ -193,6 +193,7 @@ impl<H: Hal, T: Transport, const RX_BUFFER_SIZE: usize>
         let (connection_index, connection) =
             get_connection_for_event(connections, &event, guest_cid).unwrap();
 
+        log::info!("hsj :: {:?}", event.event_type);
         match event.event_type {
             VsockEventType::ConnectionRequest => {
                 if self.listening_ports.contains(&event.destination.port) {
